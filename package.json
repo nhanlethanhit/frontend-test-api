@@ -1,0 +1,29 @@
+{
+  "name": "frontend-test-api",
+  "version": "1.0.0",
+  "description": "Frontend test at ZenS Company",
+  "main": "api.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon api/api.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nhanlethanhit/frontend-test-api.git"
+  },
+  "author": "Le Thanh Nhan",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nhanlethanhit/frontend-test-api/issues"
+  },
+  "homepage": "https://github.com/nhanlethanhit/frontend-test-api#readme",
+  "dependencies": {
+    "cookie-parser": "^1.4.6",
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "uuid": "^9.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.20"
+  }
+}
