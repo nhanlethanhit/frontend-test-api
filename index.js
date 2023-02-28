@@ -9,8 +9,9 @@ const listVote = require("./vote.json");
 const fs = require("fs");
 const corsOptions = {
   origin: [
-    "http://localhost:3000",
-    "https://frontend-test-7xxhwshwb-nhanlethanhit.vercel.app"
+    // "http://localhost:3000",
+    "https://frontend-test-fe.vercel.app",
+    "*"
   ],
   credentials: true
 };
