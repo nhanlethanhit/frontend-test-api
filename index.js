@@ -13,7 +13,8 @@ const corsOptions = {
     "https://frontend-test-fe.vercel.app",
     // "*"
   ],
-  credentials: true
+  credentials: true,
+  exposedHeaders:'Set-cookie'
 };
 app.use(cors(corsOptions));
 // app.use(function(req, res, next) {
