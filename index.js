@@ -8,11 +8,11 @@ const listUsers = require("./user.json");
 const listVote = require("./vote.json");
 const fs = require("fs");
 const optionCookies ={
-  expires: new Date(Date.now() + (24*60*60*1000)),
+  // expires: new Date(Date.now() + (24*60*60*1000)),
   sameSite:'none',
   secure:true,
-  httpOnly: true,
-  // maxAge: 1000 * 60 * 15,
+  // httpOnly: true,
+  maxAge: 1000 * 60 * 15,
   // signed: true
 }
 const corsOptions = {
@@ -22,7 +22,7 @@ const corsOptions = {
     // "*"
   ],
   credentials: true,
-  allowedHeaders:'*'
+  // allowedHeaders:'*'
   // exposedHeaders:'set-cookie'
 };
 app.use(cors(corsOptions));
