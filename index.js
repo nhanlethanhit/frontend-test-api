@@ -7,6 +7,14 @@ const data = require("./data");
 const listUsers = require("./user.json");
 const listVote = require("./vote.json");
 const fs = require("fs");
+const optionCookies ={
+  expires: new Date(Date.now() + (24*60*60*1000)),
+  sameSite:'none',
+  // secure:true,
+  // httpOnly: true,
+  // maxAge: 1000 * 60 * 15,
+  // signed: true
+}
 const corsOptions = {
   origin: [
     "http://localhost:3000",
@@ -64,12 +72,7 @@ app.get("/getJoke", (req, res) => {
         joke = data.find((el) => el.id === jokeId);
       }else{
         const userId = uuid();
-        res.cookie("user", userId,{ 
-          expires: new Date(Date.now() + (24*60*60*1000)),
-          sameSite:'none',
-          secure:true,
-          httpOnly: true
-        });
+        res.cookie("user", userId,optionCookies);
         joke = data[index];
         listUsers.push({
           id: userId,
@@ -79,13 +82,7 @@ app.get("/getJoke", (req, res) => {
       }
     }else{
       const userId = uuid();
-      res.cookie("user", userId,{ 
-        expires: new Date(Date.now() + (24*60*60*1000)),
-        sameSite:'none',
-        secure:true,
-        httpOnly: true
-
-      });
+      res.cookie("user", userId,optionCookies);
       joke = data[index];
       listUsers.push({
         id: userId,
