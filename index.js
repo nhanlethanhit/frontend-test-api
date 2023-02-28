@@ -7,14 +7,14 @@ const data = require("./data");
 const listUsers = require("./user.json");
 const listVote = require("./vote.json");
 const fs = require("fs");
-const corsOptions = {
-  origin: [
-    "http://localhost:3000",
-    "https://frontend-test-7xxhwshwb-nhanlethanhit.vercel.app"
-  ],
-  credentials: true
-};
-app.use(cors(corsOptions));
+// const corsOptions = {
+//   origin: [
+//     "http://localhost:3000",
+//     "https://frontend-test-7xxhwshwb-nhanlethanhit.vercel.app"
+//   ],
+//   credentials: true
+// };
+// app.use(cors(corsOptions));
 // app.use(function(req, res, next) {
 //   res.header("Access-Control-Allow-Origin", "*"); // update to match the domain you will make the request from
 //   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
@@ -23,6 +23,11 @@ app.use(cors(corsOptions));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cookieParser());
+// app.all('/*', function(req, res, next) {
+//   res.header("Access-Control-Allow-Origin", "*");
+//   res.header("Access-Control-Allow-Headers", "X-Requested-With");
+//   next();
+// });
 const saveUser = async (listUser) => {
   try {
     console.log("🚀 ~ file: api.js:24 ~ saveUser ~ listUser:", listUser);
@@ -105,6 +110,8 @@ app.post("/vote/:jokeId", (req, res) => {
     res.status(500).send({ error: error });
   }
 });
+
+
 const port = 5000;
 
 app.listen(port, () => {
