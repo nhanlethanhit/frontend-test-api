@@ -13,6 +13,7 @@ const corsOptions = {
     "http://localhost:3000",
     // "http://127.0.0.1",
     // "http://104.142.122.231",
+    "https://frontend-test-7xxhwshwb-nhanlethanhit.vercel.app"
   ],
   credentials: true,
 };
