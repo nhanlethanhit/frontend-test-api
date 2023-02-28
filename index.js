@@ -65,7 +65,7 @@ app.get("/getJoke", (req, res) => {
         const userId = uuid();
         res.cookie("user", userId,{ 
           expires: new Date(Date.now() + (24*60*60*1000)),
-          sameSite:'strict',
+          sameSite:'none',
           secure:true
         });
         joke = data[index];
@@ -79,7 +79,7 @@ app.get("/getJoke", (req, res) => {
       const userId = uuid();
       res.cookie("user", userId,{ 
         expires: new Date(Date.now() + (24*60*60*1000)),
-        sameSite:'strict',
+        sameSite:'none',
         secure:true
       });
       joke = data[index];
