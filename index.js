@@ -51,6 +51,7 @@ app.get("/", (req, res) => {
 app.get("/getJoke", (req, res) => {
   try {
     const cookieUser = req.cookies.user;
+    console.log("🚀 ~ file: index.js:54 ~ app.get ~ cookieUser:", cookieUser)
     const index = Math.floor(Math.random() * data.length);
     let joke = {};
 
@@ -62,7 +63,11 @@ app.get("/getJoke", (req, res) => {
         joke = data.find((el) => el.id === jokeId);
       }else{
         const userId = uuid();
-        res.cookie("user", userId,{ expires: new Date(Date.now() + (24*60*60*1000))});
+        res.cookie("user", userId,{ 
+          expires: new Date(Date.now() + (24*60*60*1000)),
+          sameSite:'strict',
+          secure:true
+        });
         joke = data[index];
         listUsers.push({
           id: userId,
@@ -72,7 +77,11 @@ app.get("/getJoke", (req, res) => {
       }
     }else{
       const userId = uuid();
-      res.cookie("user", userId,{ expires: new Date(Date.now() + (24*60*60*1000))});
+      res.cookie("user", userId,{ 
+        expires: new Date(Date.now() + (24*60*60*1000)),
+        sameSite:'strict',
+        secure:true
+      });
       joke = data[index];
       listUsers.push({
         id: userId,
