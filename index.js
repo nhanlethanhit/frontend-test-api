@@ -7,17 +7,22 @@ const data = require("./data");
 const listUsers = require("./user.json");
 const listVote = require("./vote.json");
 const fs = require("fs");
-const corsOptions = {
-  //To allow requests from client
-  origin: [
-    "http://localhost:3000",
-    // "http://127.0.0.1",
-    // "http://104.142.122.231",
-    "https://frontend-test-7xxhwshwb-nhanlethanhit.vercel.app"
-  ],
-  credentials: true,
-};
-app.use(cors(corsOptions));
+// const corsOptions = {
+//   //To allow requests from client
+//   origin: [
+//     "http://localhost:3000",
+//     // "http://127.0.0.1",
+//     // "http://104.142.122.231",
+//     "https://frontend-test-7xxhwshwb-nhanlethanhit.vercel.app"
+//   ],
+//   credentials: true,
+// };
+// app.use(cors(corsOptions));
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*"); // update to match the domain you will make the request from
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cookieParser());
