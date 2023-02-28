@@ -10,7 +10,7 @@ const fs = require("fs");
 const optionCookies ={
   expires: new Date(Date.now() + (24*60*60*1000)),
   sameSite:'none',
-  // secure:true,
+  secure:true,
   // httpOnly: true,
   // maxAge: 1000 * 60 * 15,
   // signed: true
@@ -22,7 +22,7 @@ const corsOptions = {
     // "*"
   ],
   credentials: true,
-  // exposedHeaders:'Set-cookie'
+  exposedHeaders:'set-cookie'
 };
 app.use(cors(corsOptions));
 // app.use(function(req, res, next) {
