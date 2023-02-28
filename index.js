@@ -14,7 +14,7 @@ const corsOptions = {
     // "*"
   ],
   credentials: true,
-  exposedHeaders:'Set-cookie'
+  // exposedHeaders:'Set-cookie'
 };
 app.use(cors(corsOptions));
 // app.use(function(req, res, next) {
@@ -66,8 +66,9 @@ app.get("/getJoke", (req, res) => {
         const userId = uuid();
         res.cookie("user", userId,{ 
           expires: new Date(Date.now() + (24*60*60*1000)),
-          sameSite:'none',
-          secure:true
+          // sameSite:'none',
+          secure:true,
+          httpOnly: true
         });
         joke = data[index];
         listUsers.push({
@@ -80,8 +81,10 @@ app.get("/getJoke", (req, res) => {
       const userId = uuid();
       res.cookie("user", userId,{ 
         expires: new Date(Date.now() + (24*60*60*1000)),
-        sameSite:'none',
-        secure:true
+        // sameSite:'none',
+        secure:true,
+        httpOnly: true
+
       });
       joke = data[index];
       listUsers.push({
