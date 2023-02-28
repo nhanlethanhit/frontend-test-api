@@ -36,6 +36,7 @@ const saveVote = async (listVote) => {
     console.log("🚀 ~ file: api.js:25 ~ saveUser ~ error:", error);
   }
 };
+
 app.get("/getJoke", (req, res) => {
   try {
     const cookieUser = req.cookies.user;
@@ -48,7 +49,7 @@ app.get("/getJoke", (req, res) => {
       joke = data.find((el) => el.id === jokeId);
     } else {
       const userId = uuid();
-      res.cookie("user", userId);
+      res.cookie("user", userId,{ expires: new Date(Date.now() + (24*60*60*1000))});
       joke = data[index];
       listUsers.push({
         id: userId,
