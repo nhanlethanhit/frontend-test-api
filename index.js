@@ -9,9 +9,9 @@ const listVote = require("./vote.json");
 const fs = require("fs");
 const corsOptions = {
   origin: [
-    // "http://localhost:3000",
+    "http://localhost:3000",
     "https://frontend-test-fe.vercel.app",
-    "*"
+    // "*"
   ],
   credentials: true
 };
@@ -45,7 +45,9 @@ const saveVote = async (listVote) => {
     console.log("🚀 ~ file: api.js:25 ~ saveUser ~ error:", error);
   }
 };
-
+app.get("/", (req, res) => {
+  res.json({"message": "Hello"})
+})
 app.get("/getJoke", (req, res) => {
   try {
     const cookieUser = req.cookies.user;
