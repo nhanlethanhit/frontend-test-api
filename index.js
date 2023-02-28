@@ -7,14 +7,14 @@ const data = require("./data");
 const listUsers = require("./user.json");
 const listVote = require("./vote.json");
 const fs = require("fs");
-// const corsOptions = {
-//   origin: [
-//     "http://localhost:3000",
-//     "https://frontend-test-7xxhwshwb-nhanlethanhit.vercel.app"
-//   ],
-//   credentials: true
-// };
-// app.use(cors(corsOptions));
+const corsOptions = {
+  origin: [
+    "http://localhost:3000",
+    "https://frontend-test-7xxhwshwb-nhanlethanhit.vercel.app"
+  ],
+  credentials: true
+};
+app.use(cors(corsOptions));
 // app.use(function(req, res, next) {
 //   res.header("Access-Control-Allow-Origin", "*"); // update to match the domain you will make the request from
 //   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
@@ -50,25 +50,30 @@ app.get("/getJoke", (req, res) => {
     const cookieUser = req.cookies.user;
     const index = Math.floor(Math.random() * data.length);
     let joke = {};
-    if (cookieUser) {
+    if(cookieUser){
       const userIndex = listUsers.findIndex((el) => el.id == cookieUser);
       const user = listUsers[userIndex];
-      const jokeId = user.jokeId[user.jokeId.length - 1];
-      joke = data.find((el) => el.id === jokeId);
-    } else {
-      const userId = uuid();
-      res.cookie("user", userId,{ expires: new Date(Date.now() + (24*60*60*1000))});
-      joke = data[index];
-      listUsers.push({
-        id: userId,
-        jokeId: [joke.id],
-      });
-      saveUser(listUsers);
+      if(user){
+
+        const jokeId = user.jokeId[user.jokeId.length - 1];
+        joke = data.find((el) => el.id === jokeId);
+      }else{
+        const userId = uuid();
+        res.cookie("user", userId,{ expires: new Date(Date.now() + (24*60*60*1000))});
+        joke = data[index];
+        listUsers.push({
+          id: userId,
+          jokeId: [joke.id],
+        });
+        saveUser(listUsers);
+      }
     }
+    
     return res
       .status(200)
       .send({ message: "", success: true, data: { ...joke } });
   } catch (error) {
+    console.log("🚀 ~ file: index.js:72 ~ app.get ~ error:", error)
     res.status(500).send({ error: error });
   }
 });
