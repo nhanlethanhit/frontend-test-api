@@ -53,11 +53,11 @@ app.get("/getJoke", (req, res) => {
     const cookieUser = req.cookies.user;
     const index = Math.floor(Math.random() * data.length);
     let joke = {};
+
     if(cookieUser){
       const userIndex = listUsers.findIndex((el) => el.id == cookieUser);
       const user = listUsers[userIndex];
       if(user){
-
         const jokeId = user.jokeId[user.jokeId.length - 1];
         joke = data.find((el) => el.id === jokeId);
       }else{
@@ -70,6 +70,15 @@ app.get("/getJoke", (req, res) => {
         });
         saveUser(listUsers);
       }
+    }else{
+      const userId = uuid();
+      res.cookie("user", userId,{ expires: new Date(Date.now() + (24*60*60*1000))});
+      joke = data[index];
+      listUsers.push({
+        id: userId,
+        jokeId: [joke.id],
+      });
+      saveUser(listUsers);
     }
     
     return res
